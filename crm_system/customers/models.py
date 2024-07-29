@@ -6,9 +6,22 @@ from contracts.models import Contract
 
 
 class Customer(models.Model):
-    lead = models.OneToOneField(Lead, on_delete=models.PROTECT, related_name='customer')
-    activation_date = models.DateTimeField(default=timezone.now)
-    # notes = models.TextField(blank=True, null=True)
+    lead = models.ForeignKey(
+        Lead,
+        on_delete=models.CASCADE,
+        related_name='customer',
+        verbose_name='Потенциальный клиент'
+    )
+    contract = models.OneToOneField(
+        Contract,
+        on_delete=models.CASCADE,
+        related_name='customer',
+        verbose_name='Контракт'
+    )
+    activation_date = models.DateTimeField(
+        default=timezone.now,
+        verbose_name='Дата активации клиента'
+    )
 
     def __str__(self):
         return f"Customer: {self.lead.full_name}"

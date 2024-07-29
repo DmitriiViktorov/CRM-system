@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "ads",
     "customers",
     "contracts",
-    "leads"
+    "leads",
+    "registration"
 ]
 
 MIDDLEWARE = [

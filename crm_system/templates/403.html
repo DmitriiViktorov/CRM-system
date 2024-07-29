@@ -1,0 +1,22 @@
+{% extends "_base.html" %}
+
+{% block content %}
+	<h1>Доступ запрещен</h1>
+  <p>У вас нет разрешения для доступа к этой странице.</p>
+  <p>Вы будете перенаправлены на главную страницу через <span id="countdown">5</span> секунд.</p>
+  <a href="{% url 'home' %}">Вернуться на главную страницу</a>
+
+  <script>
+      let seconds = 3;
+      const countdownElement = document.getElementById('countdown');
+
+      const countdownTimer = setInterval(function() {
+          seconds--;
+          countdownElement.textContent = seconds;
+          if (seconds <= 0) {
+              clearInterval(countdownTimer);
+              window.location.href = "{% url 'home' %}";
+          }
+      }, 1000);
+  </script>
+{% endblock %}

@@ -12,12 +12,32 @@ def contract_directory_path(instance, filename):
 
 
 class Contract(models.Model):
-    name = models.CharField(max_length=255)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    documents = models.FileField(upload_to=contract_directory_path, null=True, blank=True)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    cost = models.DecimalField(max_digits=10, decimal_places=2)
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название контракта',
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        verbose_name='Предоставляемая по контракту услуга'
+    )
+    documents = models.FileField(
+        upload_to=contract_directory_path,
+        verbose_name='Файл контракта',
+        null=True,
+        blank=True
+    )
+    start_date = models.DateField(
+        verbose_name='Дата начала действия контракта',
+    )
+    end_date = models.DateField(
+        verbose_name='Дата окончания действия контракта',
+    )
+    cost = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name='Стоимость контракта'
+    )
 
     def clean(self):
         if self.start_date and self.start_date < timezone.now().date():

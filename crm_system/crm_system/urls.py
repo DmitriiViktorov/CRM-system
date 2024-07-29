@@ -21,6 +21,8 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from ads.views import AdsStatisticView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
@@ -29,7 +31,11 @@ urlpatterns = [
     path('leads/', include('leads.urls')),
     path('contracts/', include('contracts.urls')),
     path('customers/', include('customers.urls')),
+    path('accounts/', include('registration.urls')),
+    path('crm_system/static/', AdsStatisticView.as_view())
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler403 = 'crm_system.handlers.custom_permission_denied'

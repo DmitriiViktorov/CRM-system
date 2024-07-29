@@ -50,11 +50,42 @@
             <li>
                 <hr>
             </li>
-            <li><a href="/accounts/logout" class="bar-item text-decoration-none px-3 py-3 d-block">
+            <li>
+              <span>Пользователь: {{ user.username }}</span>
+            </li>
+            <li>
+
+              <span>
+                Подразделение:
+                  {% for group in user.groups.all %}
+                    {{ group.name }}{% if not forloop.last %}, {% endif %}
+                  {% empty %}
+                    Нет групп
+                  {% endfor %}
+              </span>
+            </li>
+            <li>
+                <hr>
+            </li>
+            {% if user.is_authenticated %}
+              <li><a href="/accounts/logout" class="bar-item text-decoration-none px-3 py-3 d-block">
                 <span><i class="fas fa-sign-out-alt"></i></span><span class="px-1"> Выход</span>
-            </a></li>
+              </a></li>
+            {% else %}
+              <li><a href="/accounts/login" class="bar-item text-decoration-none px-3 py-3 d-block">
+                  <span><i class="fas fa-sign-out-alt"></i></span><span class="px-1"> Войти</span>
+              </a></li>
+            {% endif %}
+
         </ul>
     </div>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
     <div class="content px-3 pt-4">
         {% block content %}{% endblock %}
     </div>

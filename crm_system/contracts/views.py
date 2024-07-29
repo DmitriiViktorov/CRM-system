@@ -1,7 +1,8 @@
 import os
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
 from django.urls import reverse_lazy
+from crm_system.mixins import GroupPermissionMixin
 
 from .models import Contract
 from .forms import ContractForm
@@ -9,14 +10,17 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 
 
-class ContractListView(ListView):
+class BaseContractView(GroupPermissionMixin, View):
+    edit_groups = ['Managers']
     model = Contract
+
+
+class ContractListView(BaseContractView, ListView):
     template_name = 'contracts/contracts-list.html'
     context_object_name = 'contracts'
 
 
-class ContractCreateView(CreateView):
-    model = Contract
+class ContractCreateView(BaseContractView, CreateView):
     template_name = 'contracts/contracts-create.html'
     form_class = ContractForm
     success_url = reverse_lazy('contracts-list')
@@ -26,13 +30,11 @@ class ContractCreateView(CreateView):
         return response
 
 
-class ContractDetailView(DetailView):
-    model = Contract
+class ContractDetailView(BaseContractView, DetailView):
     template_name = 'contracts/contracts-detail.html'
 
 
-class ContractUpdateView(UpdateView):
-    model = Contract
+class ContractUpdateView(BaseContractView, UpdateView):
     template_name = 'contracts/contracts-edit.html'
     form_class = ContractForm
     success_url = reverse_lazy('contracts-list')
@@ -67,7 +69,6 @@ class ContractUpdateView(UpdateView):
         return response
 
 
-class ContractDeleteView(DeleteView):
-    model = Contract
+class ContractDeleteView(BaseContractView, DeleteView):
     template_name = 'contracts/contracts-delete.html'
     success_url = reverse_lazy('contracts-list')
