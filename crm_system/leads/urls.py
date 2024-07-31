@@ -1,6 +1,12 @@
-from django.urls import path, include
+from django.urls import path
 
-from .views import LeadListView, LeadCreateView, LeadDetailView, LeadUpdateView, LeadDeleteView
+from .views import (
+    LeadListView,
+    LeadCreateView,
+    LeadDetailView,
+    LeadUpdateView,
+    LeadDeleteView
+)
 
 urlpatterns = [
     path('', LeadListView.as_view(), name='leads-list'),

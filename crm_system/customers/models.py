@@ -6,6 +6,14 @@ from contracts.models import Contract
 
 
 class Customer(models.Model):
+    """
+    Модель для активных клиентов.
+
+    Атрибуты:
+        lead (Lead): Прошлое состояние клиента - потенциальных клиент
+        contract (Contract): Контракт об оказании услуги клиенту
+        activation_date (date): Дата перехода из потенциальных клиентов в активные
+    """
     lead = models.ForeignKey(
         Lead,
         on_delete=models.CASCADE,
@@ -24,19 +32,20 @@ class Customer(models.Model):
     )
 
     def __str__(self):
-        return f"Customer: {self.lead.full_name}"
+        """Возвращает полное имя клиента при отображении в шаблоне."""
+        return f"Customer: {self.full_name}"
 
     @property
     def full_name(self):
+        """Возвращает полное имя клиента"""
         return self.lead.full_name
 
     @property
     def email(self):
+        """Возвращает электронную почту клиента"""
         return self.lead.email
 
     @property
     def phone(self):
+        """Возвращает телефонный номер клиента"""
         return self.lead.phone
-
-
-

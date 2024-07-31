@@ -2,6 +2,15 @@ from django.db import models
 
 
 class Product(models.Model):
+
+    """
+    Модель для услуг.
+
+    Атрибуты:
+        name (str): Название услуги.
+        description (str): Описание услуги.
+        cost (float): Стоимость услуги.
+    """
     name = models.CharField(
         max_length=255,
         verbose_name='Название услуги',
@@ -16,4 +25,5 @@ class Product(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        """Возвращает название услуги при отображении в шаблоне"""
+        return str(self.name)

@@ -1,6 +1,12 @@
-from django.urls import path, include
+from django.urls import path
 
-from .views import CustomerListView, CustomerDetailView, CustomerDeleteView, CustomerCreateView, CustomerUpdateView
+from .views import (
+    CustomerListView,
+    CustomerDetailView,
+    CustomerDeleteView,
+    CustomerCreateView,
+    CustomerUpdateView
+)
 
 urlpatterns = [
     path('', CustomerListView.as_view(), name='customers-list'),
