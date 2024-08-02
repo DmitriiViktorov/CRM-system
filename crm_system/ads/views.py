@@ -1,4 +1,13 @@
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (
+    ListView,
+    DetailView,
+    DeleteView,
+    CreateView,
+    UpdateView,
+    View
+)
+
 from django.urls import reverse_lazy
 from crm_system.mixins import GroupPermissionMixin
 from .models import Ads
@@ -82,9 +91,9 @@ class AdsDeleteView(BaseAdsView, DeleteView):
     success_url = reverse_lazy('ads-list')
 
 
-class AdsStatisticView(ListView):
+class AdsStatisticView(LoginRequiredMixin, ListView):
     """
-    Представления для удаления имеющейся рекламной компании
+    Представления для отображения статистики эффективности всех рекламных компаний
 
     Атрибуты:
         model (Model): Модель Ads, используемая для получения данных.

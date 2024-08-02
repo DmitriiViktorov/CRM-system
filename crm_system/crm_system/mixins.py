@@ -26,7 +26,7 @@ class GroupPermissionMixin(LoginRequiredMixin, UserPassesTestMixin):
             return True
 
         if set(self.view_groups) & user_groups or self.request.user.is_superuser:
-            if self.request.method not in ['GET', 'HEAD']:
+            if self.request.method in ['GET', 'HEAD']:
                 return True
             raise PermissionDenied('You are not allowed to access this page.')
         return False

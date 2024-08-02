@@ -92,7 +92,7 @@ class Contract(models.Model):
             super().save(*args, **kwargs)
 
             if self.documents:
-                new_path = (f'contracts/product_{self.product.primary_key}'
+                new_path = (f'contracts/product_{self.product.pk}'
                             f'/contract_{self.pk}/{self.documents.name.split("/")[-1]}')
                 old_path = self.documents.path
                 new_full_path = os.path.join(settings.MEDIA_ROOT, new_path)

@@ -50,7 +50,7 @@ class CustomerCreateView(BaseCustomerView, CreateView):
     """
     template_name = 'customers/customers-create.html'
     fields = '__all__'
-    success_url = reverse_lazy('product-list')
+    success_url = reverse_lazy('customers-list')
 
 
 class CustomerDetailView(BaseCustomerView, DetailView):

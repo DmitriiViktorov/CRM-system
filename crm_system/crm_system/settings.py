@@ -39,12 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "products",
-    "ads",
-    "customers",
-    "contracts",
-    "leads",
-    "registration"
+    "products.apps.ProductsConfig",
+    "ads.apps.AdsConfig",
+    "customers.apps.CustomersConfig",
+    "contracts.apps.ContractsConfig",
+    "leads.apps.LeadsConfig",
+    "registration.apps.RegistrationConfig",
 ]
 
 MIDDLEWARE = [
@@ -135,7 +135,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
