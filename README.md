@@ -41,6 +41,7 @@
     Для этого используйте пользовательскую команду Django:
 
    ```bash
+   cd crm_system/
    python manage.py create_db
    ```
 
@@ -49,7 +50,6 @@
    Перейдите в директорию с проектом и примените миграции для настройки базы данных:
 
    ```bash
-   cd crm_system/
    python manage.py makemigrations
    python manage.py migrate
     ```
@@ -60,7 +60,7 @@
     для их загрузки в базу данных необходимо выполнить скрипт ниже:
 
       ```bash
-      python manage.py loaddata db_dackup.json
+      python manage.py loaddata db_backup.json
       ```   
    
 6. **Запуск сервера**
